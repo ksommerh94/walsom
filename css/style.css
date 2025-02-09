@@ -1741,6 +1741,11 @@ h4.fact-numbers {
   text-align: center;
 }
 
+h5.fact-box-text{
+  color: #faca30;
+  font-size: 10px;
+  text-align: center;
+}
 /* Services
 ================================================== */
 /* Service box */
