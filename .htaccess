@@ -1,0 +1,16 @@
+RewriteEngine on
+
+# Regla 1: Forzar "www"
+# Captura todo el tráfico que llega SIN "www" (tanto http como https)
+# y lo redirige a la versión CON "www" y CON "https_ssl_".
+RewriteCond %{HTTP_HOST} ^walsom\.com\.co [NC]
+RewriteRule ^(.*)$ https://www.walsom.com.co/$1 [L,R=301,QSA]
+
+# Regla 2: Forzar "httpsIS" (para los que ya escribieron "www")
+# Captura el tráfico que ya tiene "www" pero usa "http"
+# y lo redirige a "https_ssl_". Mantiene tus reglas de Cloudflare y SSL.
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:CDN-LOOP} !cloudflare
+RewriteCond %{REQUEST_URI} !^/.well-known/acme-challenge/
+RewriteCond %{HTTP_HOST} ^www\.walsom\.com\.co [NC]
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,QSA]
