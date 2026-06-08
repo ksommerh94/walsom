@@ -137,7 +137,9 @@ jQuery(function ($) {
 
 		// banner Carousel Two
 		function bannerCarouselTwo() {
-			$('.banner-carousel.banner-carousel-2').slick({
+			var $carousel = $('.banner-carousel.banner-carousel-2');
+			if ($carousel.length === 0) return;
+			$carousel.slick({
 				fade: true,
 				slidesToShow: 1,
 				slidesToScroll: 1,
